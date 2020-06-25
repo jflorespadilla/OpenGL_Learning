@@ -114,6 +114,8 @@ int main(void) {
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    // Setting the swap inteval on the window
+    glfwSwapInterval(1);
 
     if (glewInit() != GLEW_OK) {
         std::cout << "We done failed" << std::endl;
@@ -136,23 +138,23 @@ int main(void) {
     // Create an ID for a buffer
     unsigned int buffer;
     // Generate the buffer in OpenGL
-    glGenBuffers(1, &buffer);
+    GLCall(glGenBuffers(1, &buffer));
     // Bind the buffer - Basically tell OpenGL you're going to work on the buffer
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
     // Provide data to the buffer
-    glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+    GLCall(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    GLCall(glEnableVertexAttribArray(0));
+    GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
 
     // Index buffers
     unsigned int ibo;
-    glGenBuffers(1, &ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indicies, GL_STATIC_DRAW);
+    GLCall(glGenBuffers(1, &ibo));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+    GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indicies, GL_STATIC_DRAW));
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    GLCall(glEnableVertexAttribArray(0));
+    GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
 
     shaderProgramSource source = parseShader("res/shaders/basic.shader");
     // Testing that shaders loaded out properly
@@ -160,14 +162,38 @@ int main(void) {
     std::cout << source.fragmentSource << std::endl;
 
     unsigned int shader = createShader(source.vertexSource, source.fragmentSource);
-    glUseProgram(shader);
+    GLCall(glUseProgram(shader));
+
+    // Using a uniform to set the color of my graphics object
+    int location = glGetUniformLocation(shader, "u_Color");
+    ASSERT(location != -1);
+    // Note - Uniforms are per-draw calls
+    GLCall(glUniform4f(location, 0.2f, 0.5f, 0.8, 1.0f));
+
+    // Values used to change the color of my rectangle
+    float r = 0.0f;
+    float g = 0.0f;
+    float b = 0.0f;
+    float increment = 0.05f;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
+        GLCall(glUniform4f(location, r, g, b, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+        if (r > 1.0f) {
+            increment = -0.05f;
+        }
+        else if (r < 0.0f) {
+            increment = 0.05f;
+        }
+
+        r += increment;
+        g += increment * 2.0f;
+        b += increment * 4.0f;
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
@@ -176,7 +202,7 @@ int main(void) {
         glfwPollEvents();
     }
 
-    glDeleteProgram(shader);
+    GLCall(glDeleteProgram(shader));
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
