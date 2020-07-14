@@ -105,6 +105,10 @@ int main(void) {
     if (!glfwInit())
         return -1;
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "OpenGL", NULL, NULL);
     if (!window) {
@@ -135,6 +139,20 @@ int main(void) {
         1, 0, 3
     };
 
+    // Vertex array buffer - explicitly creating one
+    unsigned int vao;
+    GLCall(glGenVertexArrays(1, &vao));
+    GLCall(glBindVertexArray(vao));
+
+    /* With the vertex arry buffer created, the next few buffers
+       are tied to the vao. This sets up the layout of the vao and can be bound
+       right before a draw call. This makes it easy to use multiple vertex array buffers
+       on different pieces of geomtry. 
+       
+       Note - using a single vao and setting everything there is also a valid
+       way of doing things.
+       */
+
     // Create an ID for a buffer
     unsigned int buffer;
     // Generate the buffer in OpenGL
@@ -142,7 +160,7 @@ int main(void) {
     // Bind the buffer - Basically tell OpenGL you're going to work on the buffer
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
     // Provide data to the buffer
-    GLCall(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
+    GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
 
     GLCall(glEnableVertexAttribArray(0));
     GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
@@ -170,25 +188,39 @@ int main(void) {
     // Note - Uniforms are per-draw calls
     GLCall(glUniform4f(location, 0.2f, 0.5f, 0.8, 1.0f));
 
+
+    /* Starting vertex buffer stuff */
+
+    // Unbind all buffers
+    GLCall(glBindVertexArray(0));
+    GLCall(glUseProgram(0));
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
     // Values used to change the color of my rectangle
     float r = 0.0f;
     float g = 0.0f;
     float b = 0.0f;
-    float increment = 0.05f;
+    float increment = 0.02f;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
+        GLCall(glUseProgram(shader));      
         GLCall(glUniform4f(location, r, g, b, 1.0f));
+        GLCall(glBindVertexArray(vao));
+        GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+
+
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
         if (r > 1.0f) {
-            increment = -0.05f;
+            increment = -0.02f;
         }
         else if (r < 0.0f) {
-            increment = 0.05f;
+            increment = 0.02f;
         }
 
         r += increment;
