@@ -2,8 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\renderer.cpp" />
+    <ClCompile Include="src\vertexBuffer.cpp" />
+    <ClCompile Include="src\indexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\renderer.h" />
+    <ClInclude Include="src\vertexBuffer.h" />
+    <ClInclude Include="src\indexBuffer.h" />
   </ItemGroup>
 </Project>
