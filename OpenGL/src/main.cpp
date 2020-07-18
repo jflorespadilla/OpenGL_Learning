@@ -9,6 +9,7 @@
 #include "renderer.h"
 #include "vertexBuffer.h"
 #include "indexBuffer.h"
+#include "vertexArray.h"
 
 struct shaderProgramSource {
     std::string vertexSource;
@@ -133,17 +134,18 @@ int main(void) {
            With the vertex arry buffer created, the next few buffers
            are tied to the vao. This sets up the layout of the vao and can be bound
            right before a draw call. This makes it easy to use multiple vertex array buffers
-           on different pieces of geomtry.
+           on different pieces of geometry.
 
            Note - using a single vao and setting everything there is also a valid
            way of doing things.
         */
-
+        VertexArray va;
         // Create an ID for a buffer
         VertexBuffer vb(positions, 4 * 2 * sizeof(float));
 
-        GLCall(glEnableVertexAttribArray(0));
-        GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
+        VertexBufferLayout layout;
+        layout.push<float>(2);
+        va.addBuffer(vb, layout);
 
         // Index buffers
         IndexBuffer ib(indicies, 6);
@@ -185,7 +187,8 @@ int main(void) {
 
             GLCall(glUseProgram(shader));
             GLCall(glUniform4f(location, r, g, b, 1.0f));
-            GLCall(glBindVertexArray(vao));
+
+            va.bind();
             ib.bind();
 
 
