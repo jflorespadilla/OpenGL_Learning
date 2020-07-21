@@ -7,6 +7,7 @@
     <ClCompile Include="src\indexBuffer.cpp" />
     <ClCompile Include="src\vertexArray.cpp" />
     <ClCompile Include="src\vertexBufferLayout.cpp" />
+    <ClCompile Include="src\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -17,5 +18,6 @@
     <ClInclude Include="src\indexBuffer.h" />
     <ClInclude Include="src\vertexArray.h" />
     <ClInclude Include="src\vertexBufferLayout.h" />
+    <ClInclude Include="src\shader.h" />
   </ItemGroup>
 </Project>
