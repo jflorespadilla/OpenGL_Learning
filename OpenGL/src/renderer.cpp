@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "renderer.h"
 #include <iostream>
 
 // Error checking macros. Makes it easier to debug OpenGL

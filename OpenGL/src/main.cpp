@@ -12,6 +12,7 @@
 #include "indexBuffer.h"
 #include "vertexArray.h"
 #include "shader.h"
+#include "texture.h"
 
 int main(void) {
     GLFWwindow* window;
@@ -43,16 +44,19 @@ int main(void) {
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
         float positions[] = {
-            -0.5f, 0.5f,
-            0.0f, 0.0f,
-            0.0f, 0.5f,
-            -0.5f, 0.0f
+            -0.5f, -0.5f, 0.0f, 0.0f,
+             0.5f, -0.5f, 1.0f, 0.0f,
+             0.5f,  0.5f, 1.0f, 1.0f,
+            -0.5f,  0.5f, 0.0f, 1.0f
         };
 
         unsigned int indicies[] = {
             0, 1, 2,
-            1, 0, 3
+            2, 3, 0
         };
+
+        GLCall(glEnable(GL_BLEND));
+        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
         // Vertex array buffer - explicitly creating one
         unsigned int vao;
@@ -70,9 +74,10 @@ int main(void) {
         */
         VertexArray va;
         // Create an ID for a buffer
-        VertexBuffer vb(positions, 4 * 2 * sizeof(float));
+        VertexBuffer vb(positions, 4 * 4 * sizeof(float));
 
         VertexBufferLayout layout;
+        layout.push<float>(2);
         layout.push<float>(2);
         va.addBuffer(vb, layout);
 
@@ -82,18 +87,15 @@ int main(void) {
 
         Shader shader("res/shaders/basic.shader");
         shader.bind();
-        shader.setUniform4f("u_Color", 0.2f, 0.5f, 0.8, 1.0f);
+
+        Texture texture("res/textures/rainbow.png");
+        texture.bind();
+        shader.setUniform1i("u_Texture", 0);
 
         va.unbind();
         vb.unbind();
         ib.unbind();
         shader.unbind();
-
-        // Values used to change the color of my rectangle
-        float r = 0.0f;
-        float g = 0.0f;
-        float b = 0.0f;
-        float increment = 0.02f;
 
         Renderer renderer;
 
@@ -103,20 +105,9 @@ int main(void) {
             renderer.clear();
 
             shader.bind();
-            shader.setUniform4f("u_Color", r, g, b, 1.0f);
+            //shader.setUniform4f("u_Color", r, g, b, 1.0f);
 
             renderer.draw(va, ib, shader);
-
-            if (r > 1.0f) {
-                increment = -0.02f;
-            }
-            else if (r < 0.0f) {
-                increment = 0.02f;
-            }
-
-            r += increment;
-            g += increment * 2.0f;
-            b += increment * 4.0f;
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);

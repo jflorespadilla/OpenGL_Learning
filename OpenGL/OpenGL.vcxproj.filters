@@ -8,6 +8,8 @@
     <ClCompile Include="src\vertexArray.cpp" />
     <ClCompile Include="src\vertexBufferLayout.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -19,5 +21,10 @@
     <ClInclude Include="src\vertexArray.h" />
     <ClInclude Include="src\vertexBufferLayout.h" />
     <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\vendor\stb_image\stb_image.h" />
+    <ClInclude Include="src\texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\rainbow.png" />
   </ItemGroup>
 </Project>
