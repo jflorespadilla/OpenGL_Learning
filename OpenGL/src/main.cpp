@@ -55,6 +55,8 @@ int main(void) {
             2, 3, 0
         };
 
+        /* Learned a bit about these functions and how they work under the hood
+           I should consider reviewing these functions on my own to let the info sink in */
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
