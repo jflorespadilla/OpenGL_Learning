@@ -90,10 +90,14 @@ int main(void) {
         IndexBuffer ib(indicies, 6);
 
         glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+
+        glm::mat4 mvp = proj * view * model;
 
         Shader shader("res/shaders/basic.shader");
         shader.bind();
-        shader.setUniformMat4f("u_MVP", proj);
+        shader.setUniformMat4f("u_MVP", mvp);
 
         Texture texture("res/textures/rainbow.png");
         texture.bind();
