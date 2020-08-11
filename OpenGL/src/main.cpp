@@ -95,7 +95,7 @@ int main(void) {
         IndexBuffer ib(indicies, 6);
 
         glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
         Shader shader("res/shaders/basic.shader");
         shader.bind();
@@ -116,7 +116,8 @@ int main(void) {
         ImGui_ImplOpenGL3_Init("#version 330");
         ImGui::StyleColorsDark();
 
-        glm::vec3 translation(0.50f, 0.50f, 0.0f);
+        glm::vec3 translationA(0.50f, 0.50f, 0.0f);
+        glm::vec3 translationB(1.0f, 1.0f, 0.0f);
 
         bool show_demo_window = true;
         bool show_another_window = false;
@@ -131,17 +132,24 @@ int main(void) {
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
-            glm::mat4 mvp = proj * view * model;
-
             shader.bind();
-            //shader.setUniform4f("u_Color", r, g, b, 1.0f);
-            shader.setUniformMat4f("u_MVP", mvp);
-
-            renderer.draw(va, ib, shader);
+            {
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+                glm::mat4 mvp = proj * view * model;
+                shader.setUniformMat4f("u_MVP", mvp);
+                renderer.draw(va, ib, shader);
+            }
 
             {
-                ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 1.0f);
+                glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
+                glm::mat4 mvp = proj * view * model;
+                shader.setUniformMat4f("u_MVP", mvp);
+                renderer.draw(va, ib, shader);
+            }
+
+            {
+                ImGui::SliderFloat3("Translation A", &translationA.x, 0.0f, 1.0f);
+                ImGui::SliderFloat3("Translation B", &translationB.x, 0.0f, 1.0f);
                 ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
             }
