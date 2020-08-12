@@ -48,9 +48,10 @@ int main(void) {
         std::cout << "We done failed" << std::endl;
     }
 
+    // TODO - Prepare for batch rendering
+
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
-        // TODO - working on creating a duplicate instance of my texture
         float positions[] = {
             -0.5f, -0.5f, 0.0f, 0.0f,
              0.5f, -0.5f, 1.0f, 0.0f,
