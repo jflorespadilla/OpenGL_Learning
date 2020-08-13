@@ -95,7 +95,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src/vendor;$(SolutionDir)Dependecies\GLFW\include\;$(SolutionDir)Dependecies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,6 +162,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\tests\testClearColor.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
@@ -318,6 +319,8 @@
     <ClInclude Include="src\indexBuffer.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\tests\test.h" />
+    <ClInclude Include="src\tests\testClearColor.h" />
     <ClInclude Include="src\texture.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
