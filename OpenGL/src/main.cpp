@@ -21,6 +21,7 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "tests/testClearColor.h"
+#include "tests/testTexture.h"
 
 int main(void) {
     GLFWwindow* window;
@@ -56,7 +57,7 @@ int main(void) {
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-        Renderer renderer;
+        //Renderer renderer;
 
         ImGui::CreateContext();
         ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -66,10 +67,11 @@ int main(void) {
         bool show_demo_window = true;
         bool show_another_window = false;
 
-        test::TestClearColor test;
+        //test::TestClearColor test;
+        test::TestTexture test;
 
         while (!glfwWindowShouldClose(window)) {
-            renderer.clear();
+            //renderer.clear();
 
             test.onUpdate(0.0f);
             test.onRender();

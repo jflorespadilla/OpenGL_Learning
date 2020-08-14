@@ -18,6 +18,7 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
+    <ClCompile Include="src\tests\testTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -459,6 +460,7 @@
     <ClInclude Include="src\vendor\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\tests\test.h" />
     <ClInclude Include="src\tests\testClearColor.h" />
+    <ClInclude Include="src\tests\testTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\rainbow.png" />
