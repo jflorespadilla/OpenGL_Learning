@@ -57,8 +57,6 @@ int main(void) {
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-        //Renderer renderer;
-
         ImGui::CreateContext();
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 330");
@@ -67,19 +65,23 @@ int main(void) {
         bool show_demo_window = true;
         bool show_another_window = false;
 
-        //test::TestClearColor test;
-        test::TestTexture test;
+        test::TestClearColor test;
+        //test::TestTexture texturetest;
 
         while (!glfwWindowShouldClose(window)) {
-            //renderer.clear();
 
+            //texturetest.onUpdate(0.0f);
+            //texturetest.onRender();
             test.onUpdate(0.0f);
             test.onRender();
 
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
+
+            //texturetest.onImguiRender();
             test.onImguiRender();
+
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
