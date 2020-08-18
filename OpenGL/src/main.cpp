@@ -20,6 +20,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include "tests/test.h"
 #include "tests/testClearColor.h"
 #include "tests/testTexture.h"
 
@@ -65,22 +66,23 @@ int main(void) {
         bool show_demo_window = true;
         bool show_another_window = false;
 
-        test::TestClearColor test;
-        //test::TestTexture texturetest;
+        test::TestClearColor testClearColor;
+        test::TestTexture texturetest;
+        test::Test testArray[] = { testClearColor, texturetest };
 
         while (!glfwWindowShouldClose(window)) {
 
             //texturetest.onUpdate(0.0f);
             //texturetest.onRender();
-            test.onUpdate(0.0f);
-            test.onRender();
+            testClearColor.onUpdate(0.0f);
+            testClearColor.onRender();
 
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
             //texturetest.onImguiRender();
-            test.onImguiRender();
+            testClearColor.onImguiRender();
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

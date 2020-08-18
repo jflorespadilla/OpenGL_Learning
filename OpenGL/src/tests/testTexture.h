@@ -8,7 +8,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 namespace test {
-	class TestTexture : Test {
+	class TestTexture : public Test {
 	public:
 		TestTexture();
 		~TestTexture();
