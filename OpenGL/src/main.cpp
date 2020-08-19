@@ -66,23 +66,32 @@ int main(void) {
         bool show_demo_window = true;
         bool show_another_window = false;
 
-        test::TestClearColor testClearColor;
-        test::TestTexture texturetest;
-        test::Test testArray[] = { testClearColor, texturetest };
+        //test::TestClearColor testClearColor;
+        //test::TestTexture texturetest;
+        test::Test* test = NULL;
+
+        bool isCreated = false;
 
         while (!glfwWindowShouldClose(window)) {
 
             //texturetest.onUpdate(0.0f);
             //texturetest.onRender();
-            testClearColor.onUpdate(0.0f);
-            testClearColor.onRender();
+            //testClearColor.onUpdate(0.0f);
+            //testClearColor.onRender();
+            if (!isCreated) {
+                test = new test::TestClearColor();
+                isCreated = true;
+            }
+
+            test->onUpdate(0.0f);
+            test->onRender();
 
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
             //texturetest.onImguiRender();
-            testClearColor.onImguiRender();
+            test->onImguiRender();
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
