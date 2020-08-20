@@ -51,8 +51,6 @@ int main(void) {
         std::cout << "We done failed" << std::endl;
     }
 
-    // TODO - Prepare for batch rendering
-
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
         GLCall(glEnable(GL_BLEND));
@@ -66,18 +64,15 @@ int main(void) {
         bool show_demo_window = true;
         bool show_another_window = false;
 
-        //test::TestClearColor testClearColor;
-        //test::TestTexture texturetest;
         test::Test* test = NULL;
 
         bool isCreated = false;
 
         while (!glfwWindowShouldClose(window)) {
 
-            //texturetest.onUpdate(0.0f);
-            //texturetest.onRender();
-            //testClearColor.onUpdate(0.0f);
-            //testClearColor.onRender();
+            /*
+              TODO - Create a menu using ImGui
+            */
             if (!isCreated) {
                 test = new test::TestClearColor();
                 isCreated = true;
