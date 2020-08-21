@@ -61,34 +61,47 @@ int main(void) {
         ImGui_ImplOpenGL3_Init("#version 330");
         ImGui::StyleColorsDark();
 
-        bool show_demo_window = true;
-        bool show_another_window = false;
+        bool back_window = true;
 
         test::Test* test = NULL;
 
-        bool isCreated = false;
-
         while (!glfwWindowShouldClose(window)) {
-
-            /*
-              TODO - Create a menu using ImGui
-            */
-            if (!isCreated) {
-                test = new test::TestClearColor();
-                isCreated = true;
-            }
-
-            test->onUpdate(0.0f);
-            test->onRender();
-
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            //texturetest.onImguiRender();
-            test->onImguiRender();
+            if (test == NULL) {
+                    ImGui::Begin("Tests");
+                    if (ImGui::Button("Clear Color")) {
+                        test = new test::TestClearColor();
+                    }
+                    if (ImGui::Button("Texture")) {
+                        test = new test::TestTexture();
+                    }
+                    ImGui::End();
+            }
+
+            if (test != NULL) {
+                test->onUpdate(0.0f);
+                test->onRender();
+                test->onImguiRender();
+
+                ImGui::Begin("Back", &back_window);
+                if (ImGui::Button("Back")) {
+                    delete test;
+                    test = NULL;
+                    back_window = false;
+                }
+                ImGui::End();
+            }
 
             ImGui::Render();
+
+            if (test == NULL) {
+                GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+                GLCall(glClear(GL_COLOR_BUFFER_BIT));
+            }
+
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
