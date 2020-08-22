@@ -19,6 +19,7 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
     <ClCompile Include="src\tests\testTexture.cpp" />
+    <ClCompile Include="src\tests\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

@@ -61,46 +61,36 @@ int main(void) {
         ImGui_ImplOpenGL3_Init("#version 330");
         ImGui::StyleColorsDark();
 
-        bool back_window = true;
+        test::Test* CurrentTest = nullptr;
+        test::TestMenu* testMenu = new test::TestMenu(CurrentTest);
+        CurrentTest = testMenu;
 
-        test::Test* test = NULL;
+        testMenu->registerTest<test::TestClearColor>("Clear Color");
+        testMenu->registerTest<test::TestTexture>("Test Texture");
 
         while (!glfwWindowShouldClose(window)) {
+
+            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+            GLCall(glClear(GL_COLOR_BUFFER_BIT));
+
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            if (test == NULL) {
-                    ImGui::Begin("Tests");
-                    if (ImGui::Button("Clear Color")) {
-                        test = new test::TestClearColor();
-                    }
-                    if (ImGui::Button("Texture")) {
-                        test = new test::TestTexture();
-                    }
-                    ImGui::End();
-            }
+            if (CurrentTest) {
+                CurrentTest->onUpdate(0.0f);
+                CurrentTest->onRender();
 
-            if (test != NULL) {
-                test->onUpdate(0.0f);
-                test->onRender();
-                test->onImguiRender();
-
-                ImGui::Begin("Back", &back_window);
-                if (ImGui::Button("Back")) {
-                    delete test;
-                    test = NULL;
-                    back_window = false;
+                ImGui::Begin("Test");
+                if (CurrentTest != testMenu && ImGui::Button("<-")) {
+                    delete CurrentTest;
+                    CurrentTest = testMenu;
                 }
+                CurrentTest->onImguiRender();
                 ImGui::End();
             }
 
             ImGui::Render();
-
-            if (test == NULL) {
-                GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
-                GLCall(glClear(GL_COLOR_BUFFER_BIT));
-            }
 
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -108,7 +98,12 @@ int main(void) {
 
             glfwPollEvents();
         }
+        delete CurrentTest;
+        if (CurrentTest != testMenu) {
+            delete testMenu;
+        }
     }
+
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
     glfwDestroyWindow(window);
