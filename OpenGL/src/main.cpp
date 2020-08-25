@@ -23,6 +23,7 @@
 #include "tests/test.h"
 #include "tests/testClearColor.h"
 #include "tests/testTexture.h"
+#include "tests/chernoTestTexture2D.h"
 
 int main(void) {
     GLFWwindow* window;
@@ -53,9 +54,6 @@ int main(void) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
-        GLCall(glEnable(GL_BLEND));
-        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
         ImGui::CreateContext();
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 330");
@@ -67,6 +65,7 @@ int main(void) {
 
         testMenu->registerTest<test::TestClearColor>("Clear Color");
         testMenu->registerTest<test::TestTexture>("Test Texture");
+        testMenu->registerTest<test::ChernoTestTexture2D>("Cherno Test Texture");
 
         while (!glfwWindowShouldClose(window)) {
 

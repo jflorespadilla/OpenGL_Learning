@@ -4,6 +4,9 @@
 namespace test {
 
 	TestTexture::TestTexture() {
+		GLCall(glEnable(GL_BLEND));
+		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 		GLCall(glGenVertexArrays(1, &vao));
 		GLCall(glBindVertexArray(vao));
 		vb = new VertexBuffer(positions, 4 * 4 * sizeof(float));
