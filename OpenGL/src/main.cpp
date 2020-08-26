@@ -53,6 +53,9 @@ int main(void) {
     }
 
     std::cout << glGetString(GL_VERSION) << std::endl;
+
+    // Studies cache methods for faster retrival of GL Uniforms
+
     {
         ImGui::CreateContext();
         ImGui_ImplGlfw_InitForOpenGL(window, true);
