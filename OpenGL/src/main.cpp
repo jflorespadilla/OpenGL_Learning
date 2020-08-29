@@ -54,7 +54,7 @@ int main(void) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    // Coding later tonight
+    // Not feeling motivated...
 
     {
         ImGui::CreateContext();
