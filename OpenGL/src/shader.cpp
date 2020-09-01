@@ -119,3 +119,5 @@ int Shader::getUniformLocation(const std::string& name) {
     m_UniformLocationCache[name] = location;
     return location;
 }
+
+// Might need to implement additional functions

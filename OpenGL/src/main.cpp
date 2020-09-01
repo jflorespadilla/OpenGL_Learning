@@ -54,8 +54,6 @@ int main(void) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    // Not feeling motivated...
-
     {
         ImGui::CreateContext();
         ImGui_ImplGlfw_InitForOpenGL(window, true);
