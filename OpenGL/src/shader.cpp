@@ -120,4 +120,7 @@ int Shader::getUniformLocation(const std::string& name) {
     return location;
 }
 
-// Might need to implement additional functions
+// Moving on to a different system for graphics learning.
+// I will still use this project as I move about through
+// some chapters in my graphics book. For now this will be
+// Tagged.
