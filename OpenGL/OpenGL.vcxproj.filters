@@ -21,6 +21,7 @@
     <ClCompile Include="src\tests\testTexture.cpp" />
     <ClCompile Include="src\tests\test.cpp" />
     <ClCompile Include="src\tests\chernoTestTexture2D.cpp" />
+    <ClCompile Include="src\tests\testBatchRendering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -464,6 +465,7 @@
     <ClInclude Include="src\tests\testClearColor.h" />
     <ClInclude Include="src\tests\testTexture.h" />
     <ClInclude Include="src\tests\chernoTestTexture2D.h" />
+    <ClInclude Include="src\tests\testBatchRendering.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\rainbow.png" />

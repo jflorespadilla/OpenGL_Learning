@@ -164,6 +164,7 @@
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\tests\chernoTestTexture2D.cpp" />
     <ClCompile Include="src\tests\test.cpp" />
+    <ClCompile Include="src\tests\testBatchRendering.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
     <ClCompile Include="src\tests\testTexture.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -324,6 +325,7 @@
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\tests\chernoTestTexture2D.h" />
     <ClInclude Include="src\tests\test.h" />
+    <ClInclude Include="src\tests\testBatchRendering.h" />
     <ClInclude Include="src\tests\testClearColor.h" />
     <ClInclude Include="src\tests\testTexture.h" />
     <ClInclude Include="src\texture.h" />

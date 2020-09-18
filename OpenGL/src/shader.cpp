@@ -119,8 +119,3 @@ int Shader::getUniformLocation(const std::string& name) {
     m_UniformLocationCache[name] = location;
     return location;
 }
-
-// Moving on to a different system for graphics learning.
-// I will still use this project as I move about through
-// some chapters in my graphics book. For now this will be
-// Tagged.
