@@ -3,11 +3,14 @@
 #include "imgui/imgui.h"
 
 namespace test {
-    TestBatchRendering::TestBatchRendering()  
-    {
-		// Determine the algorithmic approach to providing
-		// a single draw call with all indicie and vertice
-		// information.
+    TestBatchRendering::TestBatchRendering()  {
+		// Initialize all relevant arrays of positions, indicies, and verticies
+
+		// Enable blending using OpenGL call
+
+		// Pass information to buffers
+
+		// Bind buffers
 	}
 
     TestBatchRendering::~TestBatchRendering() {
