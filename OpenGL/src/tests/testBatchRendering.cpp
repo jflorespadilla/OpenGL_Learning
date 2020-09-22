@@ -11,6 +11,8 @@ namespace test {
 		// Pass information to buffers
 
 		// Bind buffers
+
+		// No code update, reading being done...
 	}
 
     TestBatchRendering::~TestBatchRendering() {
