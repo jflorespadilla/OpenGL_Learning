@@ -6,7 +6,7 @@ namespace test {
     TestBatchRendering::TestBatchRendering()  {
 		// Initialize all relevant arrays of positions, indicies, and verticies
 
-		// Enable blending using OpenGL call
+		// Pre-log push
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 		// Pass information to buffers
