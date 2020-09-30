@@ -6,14 +6,15 @@ namespace test {
     TestBatchRendering::TestBatchRendering()  {
 		// Initialize all relevant arrays of positions, indicies, and verticies
 
-		// Pre-log push
+		// Enabling GL calls
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 		// Pass information to buffers
 
 		// Bind buffers
 
-		// No code update, reading being done...
+		m_Shader = std::make_unique<Shader>("res/shaders/basic.shader");
 	}
 
     TestBatchRendering::~TestBatchRendering() {
