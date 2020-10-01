@@ -3,7 +3,12 @@
 #include "imgui/imgui.h"
 
 namespace test {
-    TestBatchRendering::TestBatchRendering()  {
+    TestBatchRendering::TestBatchRendering() 
+		: m_Proj(glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f)),
+		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f))),
+		m_TranslationA(0.50f, 0.50f, 0.0f),
+		m_TranslationB(1.0f, 1.0f, 0.0f)
+	{
 		// Initialize all relevant arrays of positions, indicies, and verticies
 
 		// Enabling GL calls
