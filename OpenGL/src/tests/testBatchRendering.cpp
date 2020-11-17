@@ -9,6 +9,8 @@ namespace test {
 		m_TranslationA(0.50f, 0.50f, 0.0f),
 		m_TranslationB(1.0f, 1.0f, 0.0f)
 	{
+
+		// Going to read chapters first and then plan out modificaitons for changing this projects to something I can use
 		// Initialize all relevant arrays of positions, indicies, and verticies
 
 		// Enabling GL calls
