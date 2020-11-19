@@ -37,7 +37,6 @@ namespace test {
         m_IB = std::make_unique<IndexBuffer>(indicies, 6);
 
         m_Shader->bind();
-        m_Texture = std::make_unique<Texture>("res/textures/druids.jpg");
 	}
 
 	ChernoTestTexture2D::~ChernoTestTexture2D() {
@@ -55,9 +54,9 @@ namespace test {
 
         Renderer renderer;
 
-        m_Texture->bind();
-
         {
+            m_Texture = std::make_unique<Texture>("res/textures/druids.jpg");
+            m_Texture->bind();
             glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
             glm::mat4 mvp = m_Proj * m_View * model;
             m_Shader->bind();
@@ -65,6 +64,8 @@ namespace test {
             renderer.draw(*m_VAO, *m_IB, *m_Shader);
         }
         {
+            m_Texture = std::make_unique<Texture>("res/textures/rainbow.png");
+            m_Texture->bind();
             glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationB);
             glm::mat4 mvp = m_Proj * m_View * model;
             m_Shader->bind();
