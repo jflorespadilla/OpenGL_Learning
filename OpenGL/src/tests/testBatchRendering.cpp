@@ -13,13 +13,13 @@ namespace test {
 		// Initialize all relevant arrays of positions, indicies, and verticies
 
 			// how do you define what is a relevant array?
-			// need to sketchout a solution out of code
 
 		// Enabling GL calls
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		// Pass information to buffers
+			// Need to defind new buffers and extra index
 
 		// Bind buffers
 
