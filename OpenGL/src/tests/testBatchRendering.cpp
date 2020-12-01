@@ -10,18 +10,12 @@ namespace test {
 		m_TranslationB(1.0f, 1.0f, 0.0f)
 	{
 
-		// Initialize all relevant arrays of positions, indicies, and verticies
+		// Downloading Cherno's base library and will continue work from there.
+		// Will attempt to update this project later once I know more or less
+		// how to properly update this project.
 
-			// how do you define what is a relevant array?
-
-		// Enabling GL calls
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
-		// Pass information to buffers
-			// Need to defind new buffers and extra index
-
-		// Bind buffers
 
 		m_Shader = std::make_unique<Shader>("res/shaders/basic.shader");
 	}
